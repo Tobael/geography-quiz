@@ -1,1 +1,1 @@
-# flag-quiz
+# geography-quiz
