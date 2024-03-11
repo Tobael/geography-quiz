@@ -57,5 +57,10 @@ export default {
 
 .score {
   width: 100%;
+  text-align: center;
+}
+
+div {
+  margin-top: 0.5rem;
 }
 </style>
