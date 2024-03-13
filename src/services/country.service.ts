@@ -2,7 +2,7 @@ import countriesJson from '@/assets/countries.json'
 
 const countries: { [key: string]: string[] } = countriesJson
 
-let cache: {[key: string]: number} = {}
+let cache: { [key: string]: number } = {}
 
 let codes = Object.keys(countries)
 
@@ -16,20 +16,22 @@ function decreaseTimeout(): void {
   })
 }
 
-export function random(): { code: string, names: string[] } {
-  decreaseTimeout()
+export class CountryService {
+  static random(): { code: string, names: string[] } {
+    decreaseTimeout()
 
-  let code: string
+    let code: string
 
-  do {
-    let index = (codes.length * Math.random()) << 0
-    code = codes[index]
-  } while (cache[code] !== undefined)
+    do {
+      let index = (codes.length * Math.random()) << 0
+      code = codes[index]
+    } while (cache[code] !== undefined)
 
-  cache[code] = 15
+    cache[code] = 15
 
-  return {
-    code: code.toLowerCase(),
-    names: countries[code].map(n => n.toLowerCase()),
+    return {
+      code: code.toLowerCase(),
+      names: countries[code].map(n => n.toLowerCase()),
+    }
   }
 }

@@ -1,11 +1,11 @@
 <script lang="ts">
 import '../../node_modules/flag-icons/css/flag-icons.min.css'
-import * as countryService from '@/services/country.service'
+import { CountryService } from '@/services/country.service'
 
 export default {
   data() {
     return {
-      current: countryService.random(),
+      current: CountryService.random(),
       score: 0,
       input: '',
     }
@@ -16,7 +16,7 @@ export default {
       if (this.current.names.includes(this.input.toLowerCase())) {
         this.score++
         this.input = ''
-        this.current = countryService.random()
+        this.current = CountryService.random()
       }
     }
   }
