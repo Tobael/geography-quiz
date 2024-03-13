@@ -1,33 +1,22 @@
 <script lang="ts">
 import '../../node_modules/flag-icons/css/flag-icons.min.css'
-import * as countries from '@/assets/countries.json'
+import * as countryService from '@/services/country.service'
 
 export default {
   data() {
     return {
-      current: this.randomCountry(),
+      current: countryService.random(),
       score: 0,
       input: '',
     }
   },
 
   methods: {
-    randomCountry() {
-      const keys = Object.keys(countries)
-      const random = (keys.length * Math.random()) << 0
-      const countryCode = keys[random]
-      const countryNames = countries[countryCode]
-      return {
-        code: countryCode.toLowerCase(),
-        names: countryNames.map(c => c.toLowerCase()),
-      }
-    },
-
     check() {
       if (this.current.names.includes(this.input.toLowerCase())) {
         this.score++
         this.input = ''
-        this.current = this.randomCountry()
+        this.current = countryService.random()
       }
     }
   }
