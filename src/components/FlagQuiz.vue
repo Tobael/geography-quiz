@@ -35,28 +35,21 @@ export default {
 </script>
 
 <template>
-  <div class="flag-quiz">
-    <h1>Guess the Flag</h1>
-    <hr>
-    <div class="flag">
-      <v-icon :icon="`fi fi-${current.code}`"></v-icon>
-    </div>
-    <div class="input">
-      <v-text-field v-model="input" label="Country" autofocus variant="outlined" @keyup="check"></v-text-field>
-    </div>
-    <hr>
-    <div class="score">
-      {{ score }}
-    </div>
+  <h1>Guess the Flag</h1>
+  <hr>
+  <div class="flag">
+    <v-icon :icon="`fi fi-${current.code}`"></v-icon>
+  </div>
+  <div class="input">
+    <v-text-field v-model="input" label="Country" autofocus variant="outlined" @keyup="check"></v-text-field>
+  </div>
+  <hr>
+  <div class="score">
+    {{ score }}
   </div>
 </template>
 
 <style scoped>
-.flag-quiz {
-  display: flex;
-  flex-direction: column;
-}
-
 .flag .fi {
   width: 100%;
   height: 10rem;
