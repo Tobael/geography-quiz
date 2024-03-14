@@ -13,43 +13,48 @@ export default {
 
   methods: {
     check() {
-      if (this.current.names.includes(this.input.toLowerCase())) {
+      if (CountryService.validate(this.input, this.current.names)) {
         this.score++
         this.input = ''
         this.current = CountryService.random()
       }
-    }
+    },
+
+    skip() {
+      this.input = ''
+      this.current = CountryService.random()
+    },
   }
 }
 </script>
 
 <template>
-  <h1>Guess the Flag</h1>
-  <hr>
-  <div class="flag">
+  <div class="flag-quiz">
+    <h1>Guess the Flag</h1>
     <v-icon :icon="`fi fi-${current.code}`"></v-icon>
-  </div>
-  <div class="input">
-    <v-text-field v-model="input" label="Country" autofocus variant="outlined" @keyup="check"></v-text-field>
-  </div>
-  <hr>
-  <div class="score">
-    {{ score }}
+    <v-text-field hide-details="auto" v-model="input" label="Country" autofocus variant="outlined" @keyup="check"></v-text-field>
+    <v-btn variant="outlined" @click="skip">skip</v-btn>
+    <h2 class="score">{{ score }}</h2>
   </div>
 </template>
 
 <style scoped>
-.flag .fi {
+.flag-quiz {
+  display: flex;
+  flex-direction: column;
+}
+
+.flag-quiz > * {
+  margin-top: .25rem;
+  margin-bottom: .25rem;
+}
+
+.fi {
   width: 100%;
   height: 10rem;
 }
 
 .score {
-  width: 100%;
   text-align: center;
-}
-
-div {
-  margin-top: 0.5rem;
 }
 </style>
