@@ -34,4 +34,8 @@ export class CountryService {
       names: countries[code].map(n => n.toLowerCase()),
     }
   }
+
+  static validate(input: string, names: string[]): boolean {
+    return names.includes(input.toLowerCase())
+  }
 }
