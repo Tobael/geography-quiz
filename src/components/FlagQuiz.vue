@@ -1,28 +1,25 @@
 <script lang="ts">
 import '../../node_modules/flag-icons/css/flag-icons.min.css'
-import { CountryService } from '@/services/country.service'
+import { SinglePlayer } from '@/services/singleplayer.service'
 
 export default {
   data() {
     return {
-      current: CountryService.random(),
-      score: 0,
+      player: new SinglePlayer(),
       input: '',
     }
   },
 
   methods: {
-    check() {
-      if (CountryService.validate(this.input, this.current.names)) {
-        this.score++
+    check(): void {
+      if (this.player.validate(this.input)) {
         this.input = ''
-        this.current = CountryService.random()
       }
     },
 
-    skip() {
+    skip(): void {
       this.input = ''
-      this.current = CountryService.random()
+      this.player.skip()
     },
   }
 }
@@ -31,10 +28,10 @@ export default {
 <template>
   <div class="flag-quiz">
     <h1>Guess the Flag</h1>
-    <v-icon :icon="`fi fi-${current.code}`"></v-icon>
+    <v-icon :icon="`fi fi-${player.current.code}`"></v-icon>
     <v-text-field hide-details="auto" v-model="input" label="Country" autofocus variant="outlined" @keyup="check"></v-text-field>
     <v-btn variant="outlined" @click="skip">skip</v-btn>
-    <h2 class="score">{{ score }}</h2>
+    <h2 class="score">{{ player.score }}</h2>
   </div>
 </template>
 
